@@ -1,0 +1,16 @@
+route:
+ group_by: [cluster]
+ receiver: alerts-test
+ routes:
+  - match:
+      severity: slack
+      receiver: alerts-test
+
+receivers:
+- name: alerts-test
+  slack_configs:
+  - api_url: https://hooks.slack.com/services/TKxxx/xxxxxxxxxx/xxXXXXXXXHNu ### Caange it with your URL
+    channel: '#alerts_test'
+    icon_url: https://avatars3.githubusercontent.com/u/3380462
+    send_resolved: true
+    text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
